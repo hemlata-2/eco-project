@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h3>Calculating the difference between the 2 dates find out total days</h3>
+    <!-- <input type="date" class="date" /> -->
+    <input type="date" id="inputDate" />
+    <!-- <input type="date" id="inputFinishDate" /> -->
+    <p id="demo"></p>
+
+
+
+    <script>
+        function func() {
+            var dat1 = document.getElementById('inputDate').value;
+            var date1 = new Date(dat1) //converts string to date object
+            console.log(date1);
+
+            //dynamic date find difference between two dates 
+            // var dat2 = document.getElementById('inputFinishDate').value;
+            // var date2 = new Date(dat2)
+            // console.log(date2);
+            var days = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];   
+            // var dat2 = document.getElementById('demo').value;
+            var date2 = new Date();
+          
+            //other way 
+
+            // const date2 = new Date();
+            document.getElementById("demo").innerHTML = date2.getDate();
+            console.log(date2);
+
+            var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+            var diffDays = Math.abs((date1.getTime() - date2.getTime()) / (oneDay));
+            console.log(diffDays);
+
+            document.getElementById("ans").innerHTML =
+                Math.round(Math.abs(diffDays));
+        
+            var day  = days[date2.getDay()];
+            // document.getElementById("demo").innerHTML = "day is : " + day;
+
+                document.write('Day is : ' + day );
+        }
+
+    </script>
+
+
+<input type="checkbox" id="Month" name="Month" value="month">
+<label for="Month"> Month</label><br>
+<input type="checkbox" id="Year" name="Year" value="year">
+<label for="Year">Year</label><br>
+<input type="checkbox" id="Week" name="Week" value="week">
+<label for="Week"> Week</label><br>
+
+<button onclick="func()" type="button"> Submit
+</button>
+<h3 id="ans">Difference in days</h3><br>
+
+<script>
+
+function currentDate() {
+    var monthNames = [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+                   "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ];
+    var days = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];                       
+    var today = new Date();
+    var dd   = today.getDate();
+    var mm   = monthNames[today.getMonth()]; 
+    var yyyy = today.getFullYear();
+    var day  = days[today.getDay()];
+    today = 'Date is :' + dd + '-' + mm + '-' + yyyy;
+    document.write(today +"<br>");
+    document.write('Day is : ' + day +"<br>");
+    document.write('year is : ' + yyyy + "<br>");
+    document.write('year is : ' + mm + "<br>");
+    
+}
+currentDate();
+
+</script>
+</body>
+
+</html>

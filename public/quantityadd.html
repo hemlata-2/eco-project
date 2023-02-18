@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Input Task</title>
+</head>
+
+<body>
+    <div class="container">
+
+
+        <div class="main-div">
+            <label for="">Text : </label>
+            <input type="checkbox" class="check_box" val-type="text">
+            <div class="input-div" style="display:none">
+                <input type="number" class="quantity">
+                <span class="error"></span>
+
+                <button class="input-add">Add</button>
+                <button class="input-remove">Remove</button>
+
+            </div>
+        </div>
+
+        <div class="main-div">
+            <label for="">Email : </label>
+            <input type="checkbox" class="check_box" val-type="email">
+            <div class="input-div" style="display:none">
+                <input type="number" id="" class="quantity">
+                <span class="error"></span>
+
+                <button class="input-add">Add</button>
+                <button class="input-remove">Remove</button>
+
+            </div>
+        </div>
+
+        <div class="main-div">
+            <label for="">Number : </label>
+            <input type="checkbox" class="check_box" val-type="number">
+            <div class="input-div" style="display:none">
+                <input type="number" id="" class="quantity">
+                <span class="error"></span>
+
+                <button class="input-add">Add</button>
+                <button class="input-remove">Remove</button>
+
+            </div>
+        </div>
+
+        <div class="main-div">
+            <label for="">Radio : </label>
+            <input type="checkbox" class="check_box" val-type="radio">
+
+            <div class="input-div" style="display:none">
+                <input type="number" id="" class="quantity">
+                <input type="text" class="myText" value="">
+                <span class="error"></span>
+
+                <button class="input-add">Add</button>
+                <button class="input-remove">Remove</button>
+
+            </div>
+        </div>
+
+        <div class="main-div">
+            <label for="">checkbox : </label>
+            <input type="checkbox" class="check_box" val-type="checkbox">
+
+            <div class="input-div" style="display:none">
+                <input type="number" id="" class="quantity">
+                <input type="text" class="myText" value="">
+                <span class="error"></span>
+
+                <button class="input-add">Add</button>
+                <button class="input-remove">Remove</button>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="data_container">
+
+    </div>
+</body>
+<script>
+
+    //for the button hide and show
+
+
+    var elements = document.getElementsByClassName('check_box');
+
+
+    // console.log(elements)
+    var myFunction = function () {
+
+        if (this.checked === true) {
+            this.parentNode.querySelector('.input-div').removeAttribute('style');
+        } else if (this.checked === false) {
+            this.parentNode.querySelector('.input-div').setAttribute('style', 'display:none;');
+        }
+    };
+
+    for (var i = 0; i < elements.length; i++) {
+        // console.log(elements.length)
+
+        elements[i].addEventListener('click', myFunction);
+    }
+
+
+
+
+    //for add input 
+
+    var add_btn = document.getElementsByClassName('input-add');
+    var remove_btn = document.getElementsByClassName('input-remove');
+
+
+    var add_input = function () {
+
+        var in_type = this.parentNode.parentNode.querySelector('.check_box').getAttribute("val-type");
+        var quantity = this.parentNode.querySelector('.quantity').value;
+        if (quantity <= 0) {
+            var error = this.parentNode.querySelector(".error");
+            error.innerHTML = "Please enter a valid number";
+
+            error.style = "color:red;";
+
+
+        } else {
+
+            console.log(quantity)
+            for (let index = 1; index <= quantity; index++) {
+                var input = document.createElement("input");
+
+                input.setAttribute('type', in_type);
+                // console.log(input.setAttribute('type',in_type));
+                input.setAttribute('placeholder', `Enter the ${in_type}`);
+
+
+                var vow = document.querySelector('.data_container').append(input);
+
+                vow1 = document.createTextNode("  ");
+
+
+                var doc = document.querySelector('.data_container').append(vow1);
+                //    var doc = document.querySelector('.data_container').append(y.innerHTML);
+
+
+
+
+                if (in_type == "radio" || in_type == "checkbox") {
+                    var lable = this.parentNode.querySelector(".myText").value;
+                    if (lable!= "") {
+
+                        var y = document.createElement("label");
+                        var doclable = document.querySelector('.data_container').append(lable);
+                        y1 = `${index}`;
+
+                        console.log(y1)
+                        //Append Them to body
+
+                        radio = document.querySelector('.data_container').append(y1);
+
+                        // console.log(radio);
+                    } else {
+                        alert("please fill the field");
+                        // return false;
+                        // console.log(lable=="")
+                        // error= "please fill the field";
+
+                    }
+
+                }
+
+            }
+
+            var br = document.createElement("br");
+            var doc = document.querySelector('.data_container').append(br);
+        }
+        $(vow).on("click", ".remove_input", function(e) {
+        e.preventDefault();
+       rem= $(this).parent('div').remove();
+       console.log(rem)
+        
+    })
+
+    }
+
+
+
+    for (var i = 0; i < add_btn.length; i++) {
+        add_btn[i].addEventListener('click', add_input);
+        // console.log(add_btn[i])
+    }
+    for (var i = 0; i < remove_btn.length; i++) {
+        remove_btn[i].addEventListener('click', add_input);
+        console.log(remove_btn[i])
+    }
+
+</script>
+
+</html>

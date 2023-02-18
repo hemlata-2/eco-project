@@ -1,0 +1,240 @@
+<!-- <html>
+<head>
+  <title>Age calculator</title>
+<script>
+function ageCalculator() {
+    var userinput = document.getElementById("DOB").value;
+    var dob = new Date(userinput);
+    if(userinput==null || userinput=='') {
+      document.getElementById("message").innerHTML = "**Choose a date please!";  
+      return false; 
+    } else {
+    var month_diff = Date.now() - dob.getTime();
+    var age_dt = new Date(month_diff); 
+    var year = age_dt.getUTCFullYear();
+    var age = Math.abs(year - 1970);
+    alert(document.getElementById("result").innerHTML =  
+             "Age is: " + age + " years. ")
+    }
+}
+</script>
+</head>
+<body>
+<center>
+<h2 style="color: 32A80F" align="center"> Calculate Age from Date of Birth <br> <br> </h2> 
+<b> Enter Date of Birth: <input type=date id = DOB> </b>
+<span id = "message" style="color:red"> </span> <br><br>  
+<button type="submit" onclick = "ageCalculator()"> Calculate age </button> <br><br>
+<h3 style="color:32A80F" id="result" align="center"></h3> 
+</center>
+</body>
+</html> -->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h3>Calculating the difference between the 2 dates find out total days</h3>
+    <!-- <input type="date" class="date" /> -->
+    <input type="date" id="inputDate" />
+    <!-- <input type="date" id="inputFinishDate" /> -->
+    <p id="demo"></p>
+    <p id="errorid" style="color:red;"></p>
+
+    <form action="js1.php">
+        <input type="checkbox" id="Month" name="Month" value="month">
+        <label for="vehicle1">Month</label>
+        <input type="checkbox" id="Year" name="Year" value="year">
+        <label for="vehicle2">year</label>
+        <input type="checkbox" id="Week" name="Week" value="week">
+        <label for="vehicle3">week</label><br>
+        <!-- <input type="submit" value="Submit"> -->
+    </form>
+
+
+    <script>
+        function func() {
+
+            var dat1 = document.getElementById('inputDate').value;
+            var date1 = new Date(dat1) //converts string to date object
+            console.log(date1);
+
+            const date2 = new Date();
+            document.getElementById("demo").innerHTML = date2;
+
+            // var dat2 = document.getElementById('inputFinishDate').value;
+            // var date2 = new Date(dat2)
+
+            console.log(date2);
+
+            if (date1 < date2) {
+                var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+                var diffDays = Math.abs((date1.getTime() - date2.getTime()) / (oneDay));
+
+                document.getElementById("ans").innerHTML =
+                    Math.round(Math.abs(diffDays));
+                console.log(Math.round(diffDays));
+
+
+                // d1= "date 2is  less then with date 1 "
+                // console.log(d1);
+
+            } else {
+                error = "date1 is always less  then with date2";
+                document.getElementById("errorid").innerHTML = error;
+                // d2= "date2 is always greater  then with date1"
+                console.error(error);
+
+
+            }
+        }
+    </script>
+
+    <button onclick="func()" type="button"> Submit
+    </button>
+    <h3 id="ans">Difference in days</h3>
+    <!-- <script>
+        //   var x = 2;
+        //   var y = 2;
+        //   var z = "" + x + y;
+
+        //   text = document.getElementById("demo").innerHTML =
+        //     "the value of z is " + z;
+        //   console.log(z);
+        text = document.getElementById("demo").innerHTML =
+            "today  date is " + Date();
+
+        d = new Date("2022-05-05");
+        text1 = document.getElementsByClassName("date").innerHTML =
+            "previous date  date is " + d;
+        console.log(text1);
+
+        d = new Date();
+        test = document.getElementsByClassName("date").innerHTML =
+            "the day of a date as a number (1-31)" + "= " + d.getDay();
+
+        console.log(test);
+
+        d = new Date();
+        d.setMonth(12);
+        //   set = document.getElementsByClassName("date").innerHTML =
+        //     "the day of a date as a number (1-31)" + "= " + d.setMonth(12);
+
+        set = document.getElementsByClassName("date").innerHTML = d;
+
+        console.log(set);
+    </script> -->
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //     let marks = 34;
+    //     console.log("Data type is" +(typeof marks));
+    
+    //     let string = "jhgrjg";
+    //     console.log("data type is"+(typeof string));
+    
+    //     let null1 = null;
+    //     console.log("data type is"+(typeof null1));
+    
+    //     let bool = true;
+    //     console.log("data type is"+(typeof bool));
+    
+    //     let undef = undefined;
+    
+    //     console.log("data type is"+(typeof undef));
+    
+    //     let array = [1,2,3,4,5];
+    //     console.log("data type is"+(typeof array));
+    
+    //     let data = new Date();
+    //     console.log("data type is"+(typeof data));
+    
+    // function Date(){
+        
+        // }
+        //     console.log("data type is"+(typeof Date));
+        
+        //     let float = parseInt('34.098');
+        //     console.log(float.toFixed(5), (typeof float));
+        
+        //     let number = parseInt('34');
+        //     console.log(typeof number);
+        
+        //     let date = String(new Date());
+        //     console.log(date.toString(),(typeof date));
+        
+        //     let html;
+        //     html= "<h1> this is javascript</h1>" +"<p>jghriuririuriu</p>";
+        //     html= html.concat('this','str');
+        //     console.log(html);
+        //     console.log(html.substring(0,7));
+        //     console.log(html.split(-4));
+        //     console.log(html.length);
+        //     console.log(html.toLowerCase());
+        //     console.log(html.toLocaleUpperCase());
+        //     console.log(html.slice(-5));
+        //     console.log(html.indexOf('<'));
+        //     console.log(html.lastIndexOf('<'));
+        //     console.log(html.endsWith('str'));
+        //     console.log(html.includes('stradw'));
+        //     console.log(html.charAt(3));
+        //     console.log(html.replace('str','ok'));
+        
+        let food = 'sandwich';
+        let fruit = 'apple';
+        let myhtml = `hello<h1> this is practice</h1> ${food} <p> ${fruit}`;
+        document.body.innerHTML = myhtml;
+        
+        </script> 
+
+        </body>
+</html> -->
