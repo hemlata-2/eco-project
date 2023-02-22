@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\UserMeta;
-use App\Models\Profiletype;
+use App\User;
+
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Stripe\Exception\CardException;
@@ -69,7 +68,7 @@ class PaymentController extends Controller
         }
     }
     public function index(){
-        return view('frontend.payments.index');
+        return view('stripe');
     }
 
     public function payment_popup(){
