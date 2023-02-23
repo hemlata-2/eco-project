@@ -1,5 +1,5 @@
 <?php
-
+use App\validators\GoogleRecaptch;
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -53,11 +53,20 @@ class Controller extends BaseController
  
 
 
-    public function add(){
+    public function add($id=0, $status=1){
 
+
+        if ($id != 0 && $status != '') {
+            $update = User::where(['id' => $id])->update(['status' => $status]);
+            if ($update) {
+                return redirect()->back()->with(['success' => 'Status Change Successfully']);
+            } else {
+                return redirect()->back()->with(['error' => "Something Went Wrong"]);
+            }
+        }
 
         $roles = Role::all()->except(1);
-        return view('registration',compact('roles'));
+        return view('registration',compact('roles', 'update'));
 
     }
 
@@ -97,6 +106,11 @@ class Controller extends BaseController
         
         $insertdata=$request->all();
         // echo"<pre>"; print_r($insertdata); die;
+
+        // unset($insertdata['hobbies']);
+
+        // $insertdata['hobbies'] =  implode(',', $request->hobbies);
+
         // unset($insertdata['user_role'].);
         $insertdata['password'] = bcrypt($request['password']);
         
@@ -111,9 +125,9 @@ class Controller extends BaseController
         }
         
         unset($insertdata["_token"]);
+        // echo"<pre>"; print_r($insertdata); die;
 
         $res =User::create($insertdata);
-        // echo"<pre>"; print_r($res); die;
 
       $rolesd = UserRoleModel::create(['user_id'=>$res->id,'role_id'=>$request->user_role]);
         
@@ -162,6 +176,18 @@ class Controller extends BaseController
 
     }
 
+    function update_status($id = 0, $status = 1)
+    {
+
+        if ($id != 0 && $status != '') {
+            $update = User::where(['id' => $id])->update(['status' => $status]);
+            if ($update) {
+                return redirect()->back()->with(['success' => 'Status Change Successfully']);
+            } else {
+                return redirect()->back()->with(['error' => "Something Went Wrong"]);
+            }
+        }
+    }
 
      public function loginuser(Request $request)
      {
@@ -176,7 +202,8 @@ class Controller extends BaseController
              $role = User::with('roles_admin')->find(Auth()->user()->id);
             //  print_r($role); exit();
             // echo"<pre>"; print_r($role); exit();
-        
+                // $user = User::find(Auth::user()->id);
+
             if($role->roles_admin->role_id == 1){
                 return redirect()->route('index');
                 // return $next($request);
@@ -186,7 +213,8 @@ class Controller extends BaseController
             // if (Auth::check()) {
             // 	return redirect('index');
             // }
-            return redirect ('edituser');
+        //    return redirect()->route('edituser', $user);
+            return redirect ('edituser',auth()->user()->id)->with('success','You have Login successfully.');;
             }
 
             // return redirect()->intended('table')->withSuccess('You have Login successfully.');
@@ -200,15 +228,30 @@ class Controller extends BaseController
          }
 
 
-    }
+
+
+
+         
+         
+        }
+        
+        public function postContactForm(Request $request) {
+            $this -> validate($request, [
+                'g-recaptcha-response' =>
+                ['required', new Recaptcha()]]);
+          
+            // Recaptcha passed, do what ever you need
+        }
 
 
 
 
 
-
-    public function table($role_id='')
+    public function table(Request $request,$role_id='')
     {
+
+             
+
 
         // $email = '';
         // if ($request->input('Search')) {
@@ -233,13 +276,19 @@ class Controller extends BaseController
       
         if($role_id==2){
 
-            $data = User::where(['user_role' => $role_id])->orderBy('id','desc')->get();
+            $data = User::where(['user_role' => $role_id])->orderBy('id','desc')->when($request->has("search"), function ($search) use ($request) {
+                return $search->where("name", "like", "%" . $request->get("search") . "%")->orWhere("email", "like", "%" . $request->get("search") . "%");
+            })->get();
             // echo"<pre>"; print_r($data); die;
 
         }elseif($role_id==3){
-            $data = User::where(['user_role' => $role_id])->orderBy('id','desc')->get();
+            $data = User::where(['user_role' => $role_id])->orderBy('id','desc')->when($request->has("search"), function ($search) use ($request) {
+                return $search->where("name", "like", "%" . $request->get("search") . "%")->orWhere("email", "like", "%" . $request->get("search") . "%");
+            })->get();
         }else{
-            $data = User::orderBy('id','desc')->get();
+            $data = User::orderBy('id','desc')->when($request->has("search"), function ($search) use ($request) {
+                return $search->where("name", "like", "%" . $request->get("search") . "%")->orWhere("email", "like", "%" . $request->get("search") . "%");
+            })->get();
 
         }
 
@@ -267,6 +316,7 @@ class Controller extends BaseController
         // print_r(Auth::user()->role === 'admin'); exit('asdasd');
         if (isset($id) && $id != '') {
 
+            $result['id'] = Auth::user()->id;
         
             $result['response'] = User::find($id);
             return view('user-profile', $result);
@@ -279,7 +329,7 @@ class Controller extends BaseController
     
     public function update(Request $req)
     {
-    
+        // $response = Auth::user()->id;
         $response = User::find($req->id);
          
      
@@ -287,7 +337,13 @@ class Controller extends BaseController
         $response->address = $req['address'];
         $response->email = $req['email'];
         $response->contact = $req['contact'];
+        $response->dob = $req['dob'];
+        $response->user_role = $req['user_role'];
+        $response->username = $req['username'];
         $response->password= bcrypt($req['password']);
+        unset($response->hobbies);
+
+        $response->hobbies =  implode(',', $req['hobbies']);
     
         if ($req->hasFile('image')) {
             $image = $req->file('image');

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\StripeController;
+
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 
 
@@ -68,7 +70,12 @@ Route::get('delete/{id?}', [Controller::class, 'delete'])->name('delete');
 
 // Route::post('search_user',[Controller::class,'table'])->name('search_user');
 
+Route::get('stripe', [StripeController::class, 'index']);
+Route::post('payment', [StripeController::class, 'payment'])->name('stripe.post');
+
 });
+
+
 
 
 
