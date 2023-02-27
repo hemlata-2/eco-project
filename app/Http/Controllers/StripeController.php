@@ -13,7 +13,7 @@ class StripeController extends Controller
     {
         $this->stripe = new StripeClient(env('STRIPE_SECRET'));
     }
-    public $STRIPE_SECRET = 'pk_test_GCNQjUbwQtrHqqQDEaeZskk1';
+    public $STRIPE_SECRET = 'sk_test_G2LTsTRketAbla6O0mm0ckt3';
 
 
     public function index()

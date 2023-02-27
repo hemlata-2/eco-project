@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\StripeController;
-
+use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 
 
@@ -70,8 +70,13 @@ Route::get('delete/{id?}', [Controller::class, 'delete'])->name('delete');
 
 // Route::post('search_user',[Controller::class,'table'])->name('search_user');
 
-Route::get('stripe', [StripeController::class, 'index']);
+Route::get('stripe', [StripeController::class, 'index'])->name('stripe');
 Route::post('payment', [StripeController::class, 'payment'])->name('stripe.post');
+
+
+Route::get('full-calender', [FullCalenderController::class, 'index'])->name('full-calender');
+
+Route::post('full-calender-action', [FullCalenderController::class, 'action'])->name('full-calender-action');
 
 });
 

@@ -10,7 +10,8 @@
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('registration')}}" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Registration</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('table-basic')}}" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Student List</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('table-basic')}}" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">College List</span></a></li>
-               
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('stripe')}}" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Payment</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('full-calender')}}" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span class="hide-menu">Events Calender</span></a></li>
             
 
             </ul>

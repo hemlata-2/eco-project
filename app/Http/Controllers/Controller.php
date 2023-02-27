@@ -105,6 +105,21 @@ class Controller extends BaseController
         
         
         $insertdata=$request->all();
+        $recaptcha_secret = "6LdTcIkkAAAAALP7LkALfClVVLDXLExwNrPuSiHd";
+   
+        $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$recaptcha_secret.' &response='.$_POST['g-recaptcha-response']);
+        
+        $insertdata = json_decode($response, true);
+
+        if($insertdata['success'] === true){
+
+            echo "form submitted successfully";
+
+        }else{
+            echo "you are a robot";
+        }
+
+
         // echo"<pre>"; print_r($insertdata); die;
 
         // unset($insertdata['hobbies']);
@@ -123,6 +138,8 @@ class Controller extends BaseController
             $image->move($destinationPath, $name);
             $insertdata['image'] = $name;
         }
+
+
         
         unset($insertdata["_token"]);
         // echo"<pre>"; print_r($insertdata); die;

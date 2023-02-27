@@ -258,6 +258,13 @@
             </div>
         </div>
 
+        @if(config('services.recaptcha.key'))
+        <div class="g-recaptcha"
+            data-sitekey="{{config('services.recaptcha.key')}}">
+        </div>
+
+        @endif
+
 
 </div>
 
@@ -295,3 +302,99 @@
 <!-- ============================================================== -->
 
 @endsection
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    <!--sweet alert -->
+  <script src="sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="sweetalert2.min.css">
+<!--sweet alert -->
+
+    <script>
+      $(function() {
+        $('#cities').tagsinput({
+          maxTags: 3
+        });
+      });
+    </script>
+    <script type="text/javascript"></script>
+    <script>
+      function addProduct() {
+        // body...
+        $('#firstproduct .productdiv').clone().find('input').val('').end().appendTo('#moreproduct');
+        //   if($(".remove_btn").length == 1){
+        //                 $(".remove_btn").eq(0).hide();
+        //             }else{
+        //                 $(".remove_btn").show();
+        //             }
+      }
+    
+      function removeProduct() {
+        $('#moreproduct .productdiv').last().remove();
+        //   if($(".remove_btn").length == 1){
+        //                 $(".remove_btn").eq(0).hide();
+        //             }else{
+        //                 $(".remove_btn").show();
+        //             }
+      }
+      $(document).ready(function() {
+        // if($(".remove_btn").length == 1){
+        //     $(".remove_btn").eq(0).hide();
+        // }else{
+        //     $(".remove_btn").show();
+        // }
+      })
+    </script>
+<script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+@if(Session::has('success'))
+  <script type="text/javascript">
+
+  function massge() {
+  Swal.fire(
+            'Good job!',
+            'Successfully Saved!',
+            'success'
+        );
+  }
+
+  window.onload = massge;
+ </script>
+@endif
+
+    <script>
+      /*
+      Swal.fire('successfully created',{
+      title: 'Success!',
+      text: 'successfully created',
+      icon: 'Success',
+      confirmButtonText: 'Cool'
+    });
+
+      if(session()->get('success')){
+      Swal.fire({
+      title: 'Success!',
+      text: '{!! session()->get('success') !!}',
+      icon: 'Success',
+      confirmButtonText: 'Cool'
+    });
+      }else(session()->get('error')){
+      Swal.fire({
+      title: 'Error!',
+      text: '{!! session()->get('error') !!}',
+      icon: 'error',
+      confirmButtonText: 'Cool'
+    });
+      }
+*/
+
+</script>
+
+<script>
+  var onloadCallback = function() {
+  alert("grecaptcha is ready!");
+};
+</script>
