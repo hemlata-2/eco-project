@@ -158,7 +158,7 @@
             <div class="form-group">
                     <label class="col-sm-12">Select Role</label>
                     <div class="col-sm-12 border-bottom">
-                        <select class="form-select shadow-none ps-0 border-0 form-control-line" name="user_role">
+                        <select class="form-select shadow-none ps-0 border-0 form-control-line  select2" name="user_role" onclick="multipleFunc()">
                             @foreach ($roles as $role)
                                 <option value="{{$role->id}}">{{$role->name}}</option>
                             @endforeach
@@ -236,6 +236,27 @@
             </div>
         </div>
 
+        <?php
+        $hobbies_data_arr = [];
+        if (isset($response->hobbies) && $response->hobbies != '') {
+            $hobbies_data_arr = explode(',', $response->hobbies);
+        }
+
+    
+        ?>
+
+        <div class="form-group detail-box">
+          
+            <img src="images/icon-hobbies.png" alt=""> Hobbies <a href="javascript:void(0)" class="link me-2">
+              <i class="fa fa-pencil font-10 me-2 "></i>
+            </a>
+          
+          <div class="hobbies-btn">
+            <input id="cities" class="form-control" name="hobbies[]" value="" data-role="tagsinput" type="text">
+        
+          </div>
+        </div>
+
 
         <div class="form-group">
             <label class="col-md-12 mb-0"> Password</label>
@@ -307,6 +328,10 @@
     <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    
+   <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 
     <!--sweet alert -->
   <script src="sweetalert2.min.js"></script>

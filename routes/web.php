@@ -1,10 +1,12 @@
 <?php
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+use App\Test\TestFacades;
 
 
 /*
@@ -20,7 +22,10 @@ use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 
 Route::get('/', function () {
     return view('welcome');
+
 });
+
+
 
 // Route::get('student', [Controller::class, 'student'])->name('student');
 
@@ -77,6 +82,14 @@ Route::post('payment', [StripeController::class, 'payment'])->name('stripe.post'
 Route::get('full-calender', [FullCalenderController::class, 'index'])->name('full-calender');
 
 Route::post('full-calender-action', [FullCalenderController::class, 'action'])->name('full-calender-action');
+
+
+Route::get('/facadeex', function() {
+    return TestFacades::testingFacades();
+ });
+
+
+
 
 });
 

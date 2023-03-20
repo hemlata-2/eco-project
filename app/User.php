@@ -30,7 +30,7 @@ class User extends Authenticatable
 
     protected $table="users";
     protected $primarykey = "id";
-    protected $fillable = ['name', 'address', 'contact', 'email', 'dob', 'password', 'username', 'image', 'created_at', 'updated_at', 'user_role'];
+    protected $fillable = ['name', 'address', 'contact', 'email', 'dob', 'password', 'username', 'image', 'created_at', 'updated_at', 'user_role', 'hobbies'];
 
 
     /**

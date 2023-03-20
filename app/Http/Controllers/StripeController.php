@@ -11,7 +11,9 @@ class StripeController extends Controller
     private $stripe;
     public function __construct()
     {
-        $this->stripe = new StripeClient(env('STRIPE_SECRET'));
+        // $this->stripe = new StripeClient(env('STRIPE_SECRET'));
+                $this->stripe = new StripeClient(config('stripe.api_keys.secret_key'));
+
     }
     public $STRIPE_SECRET = 'sk_test_G2LTsTRketAbla6O0mm0ckt3';
 
